@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# 노마드코더 리액트 강의 - CRYPTO TRACKER
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+참고 api 사이트
 
-## Available Scripts
+```
+https://coinpaprika.com/ko/
+```
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+타입스크립트 설정
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+https://github.com/proamateur92/react_ts_example
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br>
 
-### `npm test`
+라이브러리 설치
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm i react-router-dom@6.3.0 react-query styled-components
+```
 
-### `npm run build`
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+\*\* 참고
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> router v6 버전부터 useParams의 타입을 지정해주지 않아도 string 타입으로 지정된다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `npm run eject`
+#### style 전역 설정하기
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 이전까지 styled-component를 사용하면 지정 컴포넌트에 고립되어 스타일링이 가능했다.
+- global style을 적용해보자.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### App.tsx
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+import { createGlobalStyle } from "styled-components";
 
-## Learn More
+const GlobalStyle = createGlobalStyle`
+    html, body, div, span, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  abbr, address, cite, code,
+  del, dfn, em, img, ins, kbd, q, samp,
+  small, strong, sub, sup, var,
+  b, i,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, figcaption, figure,
+  footer, header, hgroup, menu, nav, section, summary,
+  time, mark, audio, video {
+      margin:0;
+      padding:0;
+      border:0;
+      outline:0;
+      font-size:100%;
+      vertical-align:baseline;
+      background:transparent;
+  }
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  body {
+      line-height:1;
+  }
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+...
 
-### Code Splitting
+  `;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    <>
+      <GlobalStyle />
+      <Router />
+    </>
+```
 
-### Analyzing the Bundle Size
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Theme 설정하기
 
-### Making a Progressive Web App
+<!-- style.d.ts 설명 추가하기 -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<br>
 
-### Advanced Configuration
+\*\* 색 참고 사이트
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+https://flatuicolors.com/
+```
 
-### Deployment
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### theme.ts
 
-### `npm run build` fails to minify
+```
+import {DefaultTheme} from "styled-components";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+export const darkTheme: DefaultTheme = {
+  textColor: "whitesmoke",
+  bgColor: "#111",
+};
+```
+
+<br>
+
+#### index.tsx
+
+```
+import App from "./App";
+import { ThemeProvider } from "styled-components";
+import { darkTheme } from "./theme";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <ThemeProvider theme={darkTheme}>
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+```
