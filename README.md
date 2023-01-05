@@ -180,4 +180,15 @@ useEffect(() => {
 
 <br>
 
+## API로부터 코인 이미지 가져오기
+
+> 참고 사이트
+
+```
+https://coinicons-api.vercel.app/
+
+https://coinicons-api.vercel.app/api/icon/btc
+https://coinicons-api.vercel.app/api/icon/yfi
+```
+
 <br>

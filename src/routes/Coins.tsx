@@ -30,9 +30,11 @@ const Item = styled.li`
   margin-bottom: 10px;
   font-weight: bold;
   a {
+    display: flex;
+    align-items: center;
+
     padding: 20px;
     transition: color 0.2s ease-in-out;
-    display: block;
   }
 
   &:hover {
@@ -46,11 +48,17 @@ const Loader = styled.div`
   text-align: center;
 `;
 
+const ImageWrapper = styled.img`
+  width: 45px;
+  height: 45px;
+  margin-right: 1rem;
+`;
+
 const Coins = () => {
   interface coinInterface {
     id: string;
     name: string;
-    Symbol: string;
+    symbol: string;
     rank: number;
     is_new: boolean;
     is_active: boolean;
@@ -86,7 +94,13 @@ const Coins = () => {
         <List>
           {coins.map((coin) => (
             <Item key={coin.id}>
-              <Link to={`/${coin.name}`}>{coin.name} &rarr;</Link>
+              <Link to={`/${coin.name}`}>
+                <ImageWrapper
+                  src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+                  alt={coin.name}
+                />
+                {coin.name} &rarr;
+              </Link>
             </Item>
           ))}
         </List>
