@@ -123,3 +123,61 @@ ReactDOM.render(
   document.getElementById("root")
 );
 ```
+
+<br>
+
+## Data Fetching
+
+### Coins.tsx
+
+> 받아올 데이터의 타입을 지정해준다.
+
+```
+interface coinInterface {
+    id: string;
+    name: string;
+    Symbol: string;
+    rank: number;
+    is_new: boolean;
+    is_active: boolean;
+    type: string;
+  }
+```
+
+<br>
+
+### Coins.tsx
+
+> Data Fetching - API 호출
+> ()() 함수를 바로 실행하고 싶을 때 사용한다.
+
+```
+useEffect(() => {
+  setLoading(true);
+  try {
+    (async () => {
+      const response = await axios.get(
+        "https://api.coinpaprika.com/v1/coins"
+      );
+
+      setCoins(response.data.slice(0, 100));
+      setLoading(false);
+    })();
+  } catch (error) {
+    console.log(error);
+  }
+}, []);
+```
+
+<br>
+#### Little tips!
+- Link 컴포넌트의 to property에 리터럴 템플릿을 사용할 때 {} 중괄호로 묶어 사용한다.
+```
+<Item key={coin.id}>
+  <Link to={`/${coin.name}`}>{coin.name} &rarr;</Link>
+</Item>
+```
+
+<br>
+
+<br>
