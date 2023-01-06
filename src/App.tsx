@@ -107,7 +107,7 @@ const GlobalStyle = createGlobalStyle`
   }
   a{
     text-decoration: none;
-    color: ${(props) => props.theme.bgColor}
+    color: ${(props) => props.theme.accentColor}
   }
   `;
 const App = () => {
